@@ -62,8 +62,8 @@ unsigned int set_heatingoffoutdoortemp(char *msg, unsigned char *cmd, char *log_
 unsigned int set_gpio16state(char *msg, unsigned char *cmd, char *log_msg);
 unsigned int set_bivalent_mode(char *msg, unsigned char *cmd, char *log_msg);
 unsigned int set_bivalent_start_temperature(char *msg, unsigned char *cmd, char *log_msg);
-unsigned int set_bivalent_start_adv_temperature(char *msg, unsigned char *cmd, char *log_msg);
-unsigned int set_bivalent_stop_adv_temperature(char *msg, unsigned char *cmd, char *log_msg);
+unsigned int set_bivalent_start_adv_temp(char *msg, unsigned char *cmd, char *log_msg);
+unsigned int set_bivalent_stop_adv_temp(char *msg, unsigned char *cmd, char *log_msg);
 
 //optional pcb commands
 unsigned int set_heat_cool_mode(char *msg, char *log_msg);
@@ -120,9 +120,9 @@ const cmdStruct commands[] PROGMEM = {
   // bivalent start temp -  set from -15C to 35C 
   { "SetBivalentStartTemperature", set_bivalent_start_temperature },
   // bivalent parallel advanced start temp -  set from 0C to -15C 
-  { "SetBivalentStartAdvTemperature", set_bivalent_start_adv_temperature },
+  { "SetBivalentStartAdvTemp", set_bivalent_start_adv_temp },
   // bivalent parallel advanced stop temp -  set from 0C to -15C
-  { "SetBivalentStopAdvTemperature", set_bivalent_stop_adv_temperature },
+  { "SetBivalentStopAdvTemp", set_bivalent_stop_adv_temp },
   // set DHW temperature by sending desired temperature between 40C-75C
   { "SetDHWTemp", set_DHW_temp },
   // set heat/cool curves on z1 and z2 using a json input
