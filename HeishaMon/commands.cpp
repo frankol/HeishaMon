@@ -204,7 +204,6 @@ unsigned int set_z2_cool_request_temperature(char *msg, unsigned char *cmd, char
 
   return sizeof(panasonicSendQuery);
 }
-
 unsigned int set_bivalent_start_temperature(char *msg, unsigned char *cmd, char *log_msg) {
 
   String set_temperature_string(msg);
@@ -219,12 +218,10 @@ unsigned int set_bivalent_start_temperature(char *msg, unsigned char *cmd, char 
 
   {
     memcpy_P(cmd, panasonicSendQuery, sizeof(panasonicSendQuery));
-    cmd[66] = request_temp;
+    cmd[65] = request_temp;
   }
 
-  return sizeof(panasonicSendQuery);
-}
-unsigned int set_bivalent_stop_temperature(char *msg, unsigned char *cmd, char *log_msg) {
+unsigned int set_bivalent_start_adv_temperature(char *msg, unsigned char *cmd, char *log_msg) {
 
   String set_temperature_string(msg);
 
@@ -232,7 +229,26 @@ unsigned int set_bivalent_stop_temperature(char *msg, unsigned char *cmd, char *
 
   {
     char tmp[256] = { 0 };
-    snprintf_P(tmp, 255, PSTR("set bivalent stop temperature to %d"), request_temp - 128 );
+    snprintf_P(tmp, 255, PSTR("set bivalent parallel advanced start temperature to %d"), request_temp - 128 );
+    memcpy(log_msg, tmp, sizeof(tmp));
+  }
+
+  {
+    memcpy_P(cmd, panasonicSendQuery, sizeof(panasonicSendQuery));
+    cmd[66] = request_temp;
+  }
+
+  return sizeof(panasonicSendQuery);
+}
+unsigned int set_bivalent_stop_adv_temperature(char *msg, unsigned char *cmd, char *log_msg) {
+
+  String set_temperature_string(msg);
+
+  byte request_temp = set_temperature_string.toInt() + 128;
+
+  {
+    char tmp[256] = { 0 };
+    snprintf_P(tmp, 255, PSTR("set bivalent parallel advanced stop temperature to %d"), request_temp - 128 );
     memcpy(log_msg, tmp, sizeof(tmp));
   }
 
